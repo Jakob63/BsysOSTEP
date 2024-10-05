@@ -1,4 +1,3 @@
-// KEINE AHNUNG WAS DA ABGEHT
 #define _GNU_SOURCE
 
 #include <stdio.h>
@@ -17,12 +16,11 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execlp("ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
-            fprintf(stderr, "execlp failed\n");
+        if (execl("/bin/ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
+            fprintf(stderr, "execle failed\n");
             exit(1);
         }
     }
-
     waitpid(rc, NULL, 0);
 
     rc = fork();
@@ -35,7 +33,6 @@ int main() {
             exit(1);
         }
     }
-
     waitpid(rc, NULL, 0);
 
     rc = fork();
@@ -43,8 +40,8 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execvp("ls", argv) == -1) {
-            fprintf(stderr, "execvp failed\n");
+        if (execlp("ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
+            fprintf(stderr, "execlp failed\n");
             exit(1);
         }
     }
@@ -55,8 +52,20 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execve("/bin/ls", argv, envp) == -1) {
-            fprintf(stderr, "execve failed\n");
+        if (execv("/bin/ls", argv) == -1) {
+            fprintf(stderr, "execv failed\n");
+            exit(1);
+        }
+    }
+    waitpid(rc, NULL, 0);
+
+    rc = fork();
+    if(rc < 0) {
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if(rc == 0) {
+        if (execvp("ls", argv) == -1) {
+            fprintf(stderr, "execvp failed\n");
             exit(1);
         }
     }
