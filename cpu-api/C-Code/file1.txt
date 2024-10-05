@@ -1,0 +1,2 @@
+hello I'm Parent my x is: 102
+hello I'm Child my x is: 101
