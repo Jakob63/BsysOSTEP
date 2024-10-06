@@ -17,7 +17,7 @@ int main() {
         exit(1);
     } else if(rc == 0) {
         if (execl("/bin/ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
-            fprintf(stderr, "execle failed\n");
+            fprintf(stderr, "execl failed\n");
             exit(1);
         }
     }
