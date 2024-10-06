@@ -8,15 +8,15 @@
 #include <features.h>
 
 int main() {
-    char *argv[] = {"ls", "-l", "-a", "-h", (char *)NULL};
-    char *envp[] = {"PATH=/bin:/user/bin", NULL};
+    char *argv[] = {"ls", (char *)NULL};
+    char *envp[] = {"PATH=/usr/bin", NULL};
 
     int rc = fork();
     if(rc < 0) {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execl("/bin/ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
+        if (execl("/bin/ls", "ls", (char *)NULL) == -1) {
             fprintf(stderr, "execl failed\n");
             exit(1);
         }
@@ -28,7 +28,7 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execle("/bin/ls", "ls", "-l", "-a", "-h", (char *)NULL, envp) == -1) {
+        if (execle("/bin/ls", "ls", (char *)NULL, envp) == -1) {
             fprintf(stderr, "execle failed\n");
             exit(1);
         }
@@ -40,7 +40,7 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execlp("ls", "ls", "-l", "-a", "-h", (char *)NULL) == -1) {
+        if (execlp("ls", "ls", (char *)NULL) == -1) {
             fprintf(stderr, "execlp failed\n");
             exit(1);
         }
