@@ -9,7 +9,7 @@
 
 int main() {
     char *argv[] = {"ls", "-l", "-a", "-h", (char *)NULL};
-    char *envp[] = {"PATH=/bin:/usr/bin", NULL};
+    char *envp[] = {"PATH=/bin:/user/bin", NULL};
 
     int rc = fork();
     if(rc < 0) {
