@@ -17,6 +17,9 @@ main(int argc, char *argv[])
         // parent goes down this path (original process)
         sleep(1); // pausiert das Programm für 1 sec
                   // und nutzt die CPU in der zeit nicht
+                  // nicht signit (und dann parent wakeup oder pipe)
+                  // Possixfunktionen lieber 
+                  // pipe am besten weil sie von so aus syncronisiert werden
         printf("goodbye from Parent\n");
     }
     return 0;

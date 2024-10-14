@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#
+#include <string.h>
 
 int
 main(int argc, char *argv[])
 {
-    int pipearray[2]; // pipearray[0] input [1] ist output
+    int pipearray[2]; // pipearray[0] leseende [1] ist schreibende
     if (pipe(pipearray) == -1){
         perror("pipe");
         exit(1);
@@ -26,7 +26,7 @@ main(int argc, char *argv[])
         // verbindet pipe[1] mit I/O Stream
         // nun wird alles aus printf in die pipe geleitet
         close(pipearray[1]);
-        printf("hello from child1 \n");
+        printf("hello from child1 EXIT");
     } else {
         // parent goes down this path (original process)
         int re = fork();
@@ -41,6 +41,8 @@ main(int argc, char *argv[])
             //dup2(pipearray[0], STDIN_FILENO);
             close(pipearray[0]);
             printf("hello from child2 \n");
+            
+            
             printf("I'll tell you what child1 has to say: %s\n", buffer);
             /**
             char * pointer = malloc(sizeof(char)*600); // 600 weil bestimmt groß genug
@@ -60,7 +62,7 @@ main(int argc, char *argv[])
             printf("goodbye from parent\n");
             printf("my PID is: %d\n", getpid());
             printf("parent wait()1 result: %d\n", w);
-            printf("parent wait()2 result: %d\n", ww);
+            printf("parent wait()2 result: %d\n", ww); 
         }
     return 0;
     }

@@ -16,7 +16,9 @@ main(int argc, char *argv[])
         printf("hello from child \n");
     } else {
         // parent goes down this path (original process)
-        int w = waitpid(rc, NULL, 0);
+        int w = waitpid(rc, NULL, 0); // Null keine Statusinfo 0 weil keine Flags 
+                                    // mögliche flags: WNOHANG, WUNTRACED machen das warten asynchron
+                                    //waitpid ist nützlich für das warten auf ein spezifisches Kind
         printf("goodbye from parent\n");
         printf("parent wait() result: %d\n", w);
     }

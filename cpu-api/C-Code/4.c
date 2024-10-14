@@ -16,7 +16,7 @@ int main() {
         fprintf(stderr, "fork failed\n");
         exit(1);
     } else if(rc == 0) {
-        if (execl("/bin/ls", "ls", (char *)NULL) == -1) {
+        if (execl("/bin/ls", "ls", (char *)NULL) == -1) { // -l -a -h
             fprintf(stderr, "execl failed\n");
             exit(1);
         }
