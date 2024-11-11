@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
         return 1;
     }
     printf("PID: %d\n", getpid());
-    int megabytes = atoi(argv[1]); 
-    size_t bytes = megabytes * 1024 * 1024;
+    int mebibytes = atoi(argv[1]); 
+    size_t bytes = mebibytes * 1024 * 1024;
     int *array = (int*) malloc(bytes);
     if(array == NULL)
     {

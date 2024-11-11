@@ -20,6 +20,15 @@ int main(int argc, char *argv[])
     clock_t begin = clock();
     double time_spent;
 
+    char warten[2];
+    printf("Warten bis -go- eingegeben wird\n");
+    while(warten[0] != 'g' || warten[1] != 'o')
+    {
+        scanf("%s", warten);
+    }
+    
+    printf("Programm startet jetzt\n");
+
     while (1)
     {
         time_spent = (double)(clock() - begin) / CLOCKS_PER_SEC;
